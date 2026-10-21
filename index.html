@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AC Diagnostic 3D</title>
+<meta name="description" content="Simulador 3D de aire acondicionado para técnicos: auto R134a, mini split y camión 24 V. Manómetros, sobrecalentamiento, subenfriamiento y averías reales.">
+<meta property="og:title" content="AC Diagnostic 3D">
+<meta property="og:description" content="Simulador 3D de aire acondicionado para técnicos: auto, mini split y camión 24 V.">
+<meta property="og:image" content="img/pc.jpg">
+<link rel="icon" href="img/favicon.png">
+<style>
+@font-face{font-family:'Barlow Condensed';font-weight:700;font-display:swap;src:url(fonts/barlow-condensed-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url(fonts/ibm-plex-sans-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-weight:600;font-display:swap;src:url(fonts/ibm-plex-mono-latin-600-normal.woff2) format('woff2')}
+:root{--bg:#0f1820;--bg2:#15212b;--panel:#1b2833;--line:#2c3c49;--ink:#e8eef2;--muted:#9aabb8;--accent:#38c2b8;--accent2:#0b7a75;--low:#4b8df0;--high:#e0574a;
+--fd:"Barlow Condensed","Arial Narrow",sans-serif;--fb:"IBM Plex Sans",system-ui,sans-serif;--fm:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--fb)}
+a{color:var(--accent)}
+img{max-width:100%;height:auto;display:block}
+[hidden]{display:none!important}
+.w{max-width:1180px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .w{display:flex;align-items:center;gap:12px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font:700 22px var(--fd);letter-spacing:.02em;text-decoration:none;color:var(--ink);margin-right:auto}
+.brand img{width:34px;height:34px;border-radius:8px}
+nav.lg{display:flex;gap:4px}
+nav.lg button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:5px 9px;font:600 13px var(--fb);cursor:pointer}
+nav.lg button.on{background:var(--accent2);border-color:var(--accent2);color:#fff}
+.top{display:flex;gap:18px}.top a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}.top a:hover{color:var(--ink)}
+@media (max-width:760px){.top{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;padding:13px 20px;font:600 16px var(--fb);text-decoration:none;cursor:pointer;border:1px solid var(--line);color:var(--ink);background:var(--panel)}
+.btn.p{background:var(--accent);border-color:var(--accent);color:#06201e}
+.btn:hover{filter:brightness(1.08)}
+.btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hero{padding:48px 0 30px;background:radial-gradient(1000px 420px at 70% 0,#1d3a44 0,transparent 70%)}
+.hero .w{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:36px;align-items:center}
+.hero h1{font:700 clamp(40px,5.4vw,66px)/1 var(--fd);margin:0 0 14px;letter-spacing:.01em}
+.hero h1 b{color:var(--accent);font-weight:700}
+.hero p.lead{color:var(--muted);font-size:18px;margin:0 0 22px;max-width:46ch}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.shot{border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0}.tags span{font:600 12px var(--fm);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 8px}
+@media (max-width:900px){.hero .w{grid-template-columns:1fr}.hero{padding-top:30px}}
+section{padding:54px 0;border-top:1px solid var(--line)}
+section h2{font:700 clamp(30px,3.6vw,42px)/1.05 var(--fd);margin:0 0 8px}
+section p.sub{color:var(--muted);margin:0 0 26px;max-width:62ch}
+.models{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.models figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.models img{aspect-ratio:9/12;object-fit:cover;object-position:center 35%;width:100%}
+.models figcaption{padding:10px 12px;font-weight:600}.models figcaption small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+@media (max-width:900px){.models{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+.feat div{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}.feat b{display:block;margin-bottom:4px}.feat div{color:var(--muted);font-size:14px}.feat b{color:var(--ink);font-size:16px}
+@media (max-width:760px){.feat{grid-template-columns:1fr}}
+.get{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{font:700 26px var(--fd);margin:0 0 6px}.card p{color:var(--muted);margin:0 0 16px}
+.qrbox{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+#qr{background:#fff;padding:10px;border-radius:12px;width:168px;height:168px;flex:none}#qr svg{width:100%;height:100%;display:block}
+.qrbox small{color:var(--muted);display:block;max-width:30ch}
+@media (max-width:760px){.get{grid-template-columns:1fr}}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:4px;cursor:pointer;text-align:left;color:var(--ink);font:inherit}
+.plan .n{color:var(--muted);font-weight:600}.plan .pr{font:700 40px/1 var(--fd)}.plan .pr small{font-size:18px;color:var(--muted)}
+.plan.best{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}.plan.on{background:color-mix(in srgb,var(--accent) 16%,var(--panel));border-color:var(--accent)}
+.plan .tag{font:600 11px var(--fm);color:var(--accent);text-transform:uppercase;letter-spacing:.06em;min-height:1em}
+@media (max-width:760px){.plans{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.buy{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;margin-top:16px}
+@media (max-width:900px){.buy{grid-template-columns:1fr}}
+ol.steps{margin:0;padding-left:20px;display:grid;gap:10px;color:var(--muted)}ol.steps b{color:var(--ink)}
+.pp{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;font:600 15px var(--fm)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+form .full{grid-column:1/3}
+label{display:grid;gap:4px;font-size:13px;color:var(--muted)}
+input,select{font:500 16px var(--fb);color:var(--ink);background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:11px 12px;width:100%}
+input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+@media (max-width:560px){form{grid-template-columns:1fr}form .full{grid-column:auto}}
+#msg{min-height:1.4em;font-weight:600}
+footer{padding:30px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <a class="brand" href="#"><img src="img/icono.png" alt="">AC Diagnostic 3D</a>
+  <div class="top"><a href="#modelos" data-t="m_models">Modelos</a><a href="#descargar" data-t="m_get">Descargar</a><a href="#licencia" data-t="m_lic">Licencia</a></div>
+  <nav class="lg"><button data-l="es">ES</button><button data-l="pt">PT</button><button data-l="en">EN</button></nav>
+</div></header>
+
+<div class="hero"><div class="w">
+  <div>
+    <h1 data-t="h1">Diagnostica el aire acondicionado <b>en 3D</b></h1>
+    <p class="lead" data-t="lead">Simulador para técnicos: engancha los manómetros, mide sobrecalentamiento y subenfriamiento, mete averías reales y mira cómo reacciona el sistema.</p>
+    <div class="cta">
+      <a class="btn" href="ACDiagnostic3D.apk" download><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span data-t="apk">Descargar APK Android</span></a>
+    </div>
+    <div class="tags"><span>R134a</span><span>Mini split R410A</span><span data-t="t24">Camión 24 V</span><span>ES · PT · EN · 中文</span></div>
+  </div>
+  <div class="shot"><img src="img/pc.jpg" width="1600" height="900" alt="AC Diagnostic 3D"></div>
+</div></div>
+
+<section id="modelos"><div class="w">
+  <h2 data-t="mh">Tres equipos, el mismo principio</h2>
+  <p class="sub" data-t="ms">Cada técnico encuentra lo suyo: el aire del coche, el split de casa o el equipo de techo del camión. Mismo ciclo de gas, distinta vista y distintos controles.</p>
+  <div class="models">
+    <figure><img src="img/auto.jpg" alt="" loading="lazy"><figcaption data-t="f1">Auto<small>R134a, compresor con embrague o variable</small></figcaption></figure>
+    <figure><img src="img/split.jpg" alt="" loading="lazy"><figcaption data-t="f2">Mini split<small>Mando a distancia, multímetro y averías eléctricas</small></figcaption></figure>
+    <figure><img src="img/camion.jpg" alt="" loading="lazy"><figcaption data-t="f3">Camión 24 V<small>Equipo de techo con batería y consumo</small></figcaption></figure>
+    <figure><img src="img/mano.jpg" alt="" loading="lazy"><figcaption data-t="f4">Manómetros<small>Baja, alta, SH y SC como en el taller</small></figcaption></figure>
+  </div>
+  <div class="feat">
+    <div data-t="x1"><b>Averías reales</b>Falta de gas, exceso, válvula, condensador sucio, compresor y más.</div>
+    <div data-t="x2"><b>Modo simple y experto</b>Para aprender desde cero o para practicar como profesional.</div>
+    <div data-t="x3"><b>App Android</b>Instala el APK y úsala en tu teléfono o tablet.</div>
+  </div>
+</div></section>
+
+<section id="descargar"><div class="w">
+  <h2 data-t="gh">Úsala donde quieras</h2>
+  <p class="sub" data-t="gs">Prueba gratis 5 días en tu teléfono Android.</p>
+  <div class="get">
+    <div class="card">
+      <h3 data-t="g2">En el teléfono Android</h3>
+      <p data-t="g2p">Escanea el código con la cámara del móvil o descarga el APK.</p>
+      <div class="qrbox"><div id="qr"></div><div><a class="btn" href="ACDiagnostic3D.apk" download><span data-t="apk">Descargar APK Android</span></a><small style="margin-top:10px" data-t="g2s">Si Android avisa, permite instalar apps de esta fuente.</small></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="licencia"><div class="w">
+  <h2 data-t="lh">Licencia</h2>
+  <p class="sub" data-t="ls">Después de la prueba elige un plan. La misma licencia sirve para el teléfono o el ordenador donde la actives.</p>
+  <div class="plans">
+    <button type="button" class="plan" data-p="7 días"><span class="tag"></span><span class="n" data-t="p1">7 días</span><span class="pr">3 <small>USD</small></span></button>
+    <button type="button" class="plan best on" data-p="30 días"><span class="tag" data-t="pop">Más elegido</span><span class="n" data-t="p2">30 días</span><span class="pr">8 <small>USD</small></span></button>
+    <button type="button" class="plan" data-p="1 año"><span class="tag"></span><span class="n" data-t="p3">1 año</span><span class="pr">25 <small>USD</small></span></button>
+    <button type="button" class="plan" data-p="Permanente"><span class="tag"></span><span class="n" data-t="p4">Permanente</span><span class="pr">45 <small>USD</small></span></button>
+  </div>
+  <div class="buy">
+    <div class="card">
+      <h3 data-t="hh">Cómo comprar</h3>
+      <ol class="steps">
+        <li data-t="s1">Abre la app y copia tu <b>ID</b> (sale en la pantalla de licencia).</li>
+        <li data-t="s2">Rellena el pedido con tu ID y el plan.</li>
+        <li data-t="s3">Paga. Desde otros países por <b>PayPal</b>; en Angola te contactamos para indicarte cómo.</li>
+        <li data-t="s4">Te mandamos el <b>código de activación</b> y lo escribes en la app.</li>
+      </ol>
+      <div class="pp">PayPal: <span id="ppm">capoteadonis1979@yahoo.es</span> <button type="button" class="btn" id="ppc" style="padding:6px 12px;font-size:14px" data-t="copy">Copiar</button></div>
+    </div>
+    <div class="card">
+      <h3 data-t="oh">Pedir licencia</h3>
+      <form id="ord">
+        <label><span data-t="o1">Nombre</span><input name="nombre" required maxlength="60"></label>
+        <label><span data-t="o2">WhatsApp, teléfono o correo</span><input name="contacto" required maxlength="80"></label>
+        <label><span data-t="o3">ID de la app</span><input name="id" maxlength="12" placeholder="XXXX-XXXX" style="font-family:var(--fm)"></label>
+        <label><span data-t="o4">País</span><input name="pais" maxlength="40"></label>
+        <label><span data-t="o5">Plan</span><select name="plan"><option value="7 días">7 días · 3 USD</option><option value="30 días" selected>30 días · 8 USD</option><option value="1 año">1 año · 25 USD</option><option value="Permanente">Permanente · 45 USD</option></select></label>
+        <label><span data-t="o6">Forma de pago</span><select name="pago"><option value="PayPal">PayPal</option><option value="Angola" data-t="o6a">Pago en Angola</option><option value="Otro" data-t="o6b">Otro</option></select></label>
+        <label class="full"><span data-t="o7">Mensaje (opcional)</span><input name="mensaje" maxlength="300"></label>
+        <div class="full" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn p" type="submit" id="send" data-t="send">Enviar pedido</button><span id="msg"></span></div>
+      </form>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="w">© 2026 AC Diagnostic 3D · <span data-t="foot">Simulador educativo para técnicos de aire acondicionado.</span></div></footer>
+
+<script src="qrcode.js"></script>
+<script>
+// Dirección del servidor de pedidos (Google Apps Script). Vacío = el pedido se manda por correo.
+const ORDER_URL='',ORDER_MAIL='capoteadonis1979@yahoo.es';
+const T={
+pt:{m_models:'Modelos',m_get:'Descarregar',m_lic:'Licença',h1:'Diagnostica o ar condicionado <b>em 3D</b>',lead:'Simulador para técnicos: liga os manómetros, mede sobreaquecimento e subarrefecimento, introduz avarias reais e vê como o sistema reage.',open:'Abrir no computador',apk:'Descarregar APK Android',t24:'Camião 24 V',
+mh:'Três equipamentos, o mesmo princípio',ms:'Cada técnico encontra o seu: o ar do carro, o split de casa ou o equipamento de tejadilho do camião. O mesmo ciclo de gás, vista e controlos diferentes.',
+f1:'Carro<small>R134a, compressor com embraiagem ou variável</small>',f2:'Mini split<small>Comando, multímetro e avarias elétricas</small>',f3:'Camião 24 V<small>Equipamento de tejadilho com bateria e consumo</small>',f4:'Manómetros<small>Baixa, alta, SH e SC como na oficina</small>',
+x1:'<b>Avarias reais</b>Falta de gás, excesso, válvula, condensador sujo, compressor e mais.',x2:'<b>Modo simples e especialista</b>Para aprender do zero ou praticar como profissional.',x3:'<b>App Android</b>Instala o APK e usa no telemóvel ou tablet.',
+gh:'Usa onde quiseres',gs:'Experimenta grátis 5 dias no telemóvel Android.',g1:'No computador',g1p:'Abre no navegador em ecrã grande, sem instalar nada.',g2:'No telemóvel Android',g2p:'Lê o código com a câmara do telemóvel ou descarrega o APK.',g2s:'Se o Android avisar, permite instalar apps desta fonte.',
+lh:'Licença',ls:'Depois do teste escolhe um plano. A licença serve para o telemóvel ou o computador onde a ativares.',pop:'Mais escolhido',p1:'7 dias',p2:'30 dias',p3:'1 ano',p4:'Permanente',
+hh:'Como comprar',s1:'Abre a app e copia o teu <b>ID</b> (aparece no ecrã de licença).',s2:'Preenche o pedido com o teu ID e o plano.',s3:'Paga. De outros países por <b>PayPal</b>; em Angola contactamos-te para explicar como.',s4:'Enviamos-te o <b>código de ativação</b> e escreves na app.',copy:'Copiar',
+oh:'Pedir licença',o1:'Nome',o2:'WhatsApp, telefone ou e-mail',o3:'ID da app',o4:'País',o5:'Plano',o6:'Forma de pagamento',o6a:'Pagamento em Angola',o6b:'Outro',o7:'Mensagem (opcional)',send:'Enviar pedido',foot:'Simulador educativo para técnicos de ar condicionado.',
+e1:'Escreve o teu nome e um contacto.',e2:'A enviar…',e3:'Pedido enviado ✓ Entraremos em contacto em breve.',e4:'Não foi possível enviar. Tenta de novo.',e5:'Abre-se o teu e-mail com o pedido: toca em Enviar.',cp:'Copiado ✓'},
+en:{m_models:'Models',m_get:'Download',m_lic:'License',h1:'Diagnose air conditioning <b>in 3D</b>',lead:'A simulator for technicians: hook up the gauges, measure superheat and subcooling, inject real faults and watch the system react.',open:'Open on computer',apk:'Download Android APK',t24:'24 V truck',
+mh:'Three units, one principle',ms:'Every technician finds their own: car A/C, home split or the truck rooftop unit. Same refrigerant cycle, different view and controls.',
+f1:'Car<small>R134a, clutch or variable compressor</small>',f2:'Mini split<small>Remote, multimeter and electrical faults</small>',f3:'24 V truck<small>Rooftop unit with battery and current draw</small>',f4:'Gauges<small>Low, high, SH and SC like in the shop</small>',
+x1:'<b>Real faults</b>Low charge, overcharge, valve, dirty condenser, compressor and more.',x2:'<b>Simple and expert mode</b>Learn from scratch or practice like a pro.',x3:'<b>Android app</b>Install the APK and use it on your phone or tablet.',
+gh:'Use it anywhere',gs:'Free 5-day trial on your Android phone.',g1:'On the computer',g1p:'Opens full screen in the browser, nothing to install.',g2:'On Android phones',g2p:'Scan the code with your phone camera or download the APK.',g2s:'If Android warns you, allow installing apps from this source.',
+lh:'License',ls:'After the trial pick a plan. The license works on the phone or computer where you activate it.',pop:'Most popular',p1:'7 days',p2:'30 days',p3:'1 year',p4:'Lifetime',
+hh:'How to buy',s1:'Open the app and copy your <b>ID</b> (shown on the license screen).',s2:'Fill in the order with your ID and plan.',s3:'Pay. From other countries by <b>PayPal</b>; in Angola we contact you with instructions.',s4:'We send you the <b>activation code</b> and you enter it in the app.',copy:'Copy',
+oh:'Order a license',o1:'Name',o2:'WhatsApp, phone or email',o3:'App ID',o4:'Country',o5:'Plan',o6:'Payment method',o6a:'Payment in Angola',o6b:'Other',o7:'Message (optional)',send:'Send order',foot:'Educational simulator for air conditioning technicians.',
+e1:'Enter your name and a contact.',e2:'Sending…',e3:'Order sent ✓ We will contact you soon.',e4:'Could not send. Try again.',e5:'Your email opens with the order: tap Send.',cp:'Copied ✓'}};
+const ES={e1:'Escribe tu nombre y un contacto.',e2:'Enviando…',e3:'Pedido enviado ✓ Te contactaremos pronto.',e4:'No se pudo enviar. Prueba otra vez.',e5:'Se abre tu correo con el pedido: pulsa Enviar.',cp:'Copiado ✓'};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$$('[data-t]').forEach(e=>e.dataset.es=e.innerHTML);
+let L='es';const tx=k=>(T[L]&&T[L][k])||ES[k]||'';
+function setL(l){L=T[l]?l:'es';document.documentElement.lang=L;$$('[data-t]').forEach(e=>{e.innerHTML=L==='es'?e.dataset.es:(T[L][e.dataset.t]||e.dataset.es);});$$('nav.lg button').forEach(b=>b.classList.toggle('on',b.dataset.l===L));try{localStorage.setItem('webLang',L)}catch(e){}}
+$$('nav.lg button').forEach(b=>b.onclick=()=>setL(b.dataset.l));
+let sv=null;try{sv=localStorage.getItem('webLang')}catch(e){}
+setL(sv||((navigator.language||'es').slice(0,2)==='pt'?'pt':(navigator.language||'es').slice(0,2)==='es'?'es':'en'));
+// QR: la propia página (el móvil la abre y descarga el APK)
+try{const q=qrcode(0,'M');q.addData(location.href.split('#')[0]);q.make();$('#qr').innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true});}catch(e){$('#qr').hidden=true;}
+// ID guardado si ya abrió el simulador en este navegador
+try{const id=localStorage.getItem('acId');if(id)$('#ord [name=id]').value=id;}catch(e){}
+// planes -> selector
+$$('.plan').forEach(p=>p.onclick=()=>{$$('.plan').forEach(x=>x.classList.toggle('on',x===p));$('#ord [name=plan]').value=p.dataset.p;$('#ord').scrollIntoView({behavior:'smooth',block:'center'});});
+$('#ord [name=plan]').onchange=e=>$$('.plan').forEach(x=>x.classList.toggle('on',x.dataset.p===e.target.value));
+$('#ppc').onclick=()=>{const t=$('#ppm').textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{const b=$('#ppc');b.textContent=tx('cp');setTimeout(()=>b.textContent=L==='es'?'Copiar':T[L].copy,1500);}).catch(()=>{});};
+$('#ord').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),d=Object.fromEntries(f.entries()),m=$('#msg');
+  for(const k in d)d[k]=String(d[k]).trim();
+  if(!d.nombre||!d.contacto){m.style.color='#e0574a';m.textContent=tx('e1');return;}
+  const body={tipo:'pedido',origen:'web',...d};
+  if(!ORDER_URL){const t=['ID: '+d.id,'Plan: '+d.plan,'Nombre: '+d.nombre,'Contacto: '+d.contacto,'País: '+d.pais,'Pago: '+d.pago,'Mensaje: '+d.mensaje].join('\n');
+    location.href='mailto:'+ORDER_MAIL+'?subject='+encodeURIComponent('Pedido AC Diagnostic 3D '+(d.id||''))+'&body='+encodeURIComponent(t);m.style.color='var(--accent)';m.textContent=tx('e5');return;}
+  const b=$('#send');b.disabled=true;m.style.color='var(--muted)';m.textContent=tx('e2');
+  fetch(ORDER_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)})
+   .then(()=>{m.style.color='var(--accent)';m.textContent=tx('e3');e.target.reset();})
+   .catch(()=>{m.style.color='#e0574a';m.textContent=tx('e4');}).finally(()=>b.disabled=false);};
+</script>
+</body>
+</html>
