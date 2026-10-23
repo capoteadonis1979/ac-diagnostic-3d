@@ -6,7 +6,7 @@ Categoría: Educación (o Herramientas)
 Versión: 2.16.8
 Idiomas de la app: Español, Português, English, 中文
 Política de privacidad: https://capoteadonis1979.github.io/ac-diagnostic-3d/privacidad.html
-Contacto: capoteadonis1979@yahoo.es
+Contacto: capoteapps@gmail.com
 Permisos: Internet (consultar altura/tiempo si el usuario lo pide) · Ubicación (solo para la altura del lugar)
 Precio: gratis con 5 días de prueba; licencia 7 días 3 USD · 30 días 8 USD · 1 año 25 USD · permanente 45 USD
 
