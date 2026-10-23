@@ -1,0 +1,72 @@
+AC Diagnostic 3D — ficha para Uptodown
+=======================================
+
+Nombre: AC Diagnostic 3D
+Categoría: Educación (o Herramientas)
+Versión: 2.16.8
+Idiomas de la app: Español, Português, English, 中文
+Política de privacidad: https://capoteadonis1979.github.io/ac-diagnostic-3d/privacidad.html
+Contacto: capoteadonis1979@yahoo.es
+Permisos: Internet (consultar altura/tiempo si el usuario lo pide) · Ubicación (solo para la altura del lugar)
+Precio: gratis con 5 días de prueba; licencia 7 días 3 USD · 30 días 8 USD · 1 año 25 USD · permanente 45 USD
+
+
+----------------------------------------------------------------
+ESPAÑOL
+----------------------------------------------------------------
+Título corto (máx. ~80):
+Simulador 3D de aire acondicionado: auto, mini split y camión 24 V
+
+Descripción:
+AC Diagnostic 3D es un simulador de aire acondicionado para técnicos y estudiantes. Conecta el manómetro, arranca el equipo y mira cómo se comportan las presiones, las temperaturas y la corriente como en un equipo real.
+
+• Tres equipos: aire de auto (R134a / R1234yf, válvula TXV o tubo orificio, compresor de embrague o variable), mini split (R410A, R32, R22, R290; on/off con capilar o inverter con EEV; 110 o 220 V) y aire de techo de camión 24 V.
+• Manómetro analógico o digital, con sobrecalentamiento (SH) y subenfriamiento (SC) usando pinzas de temperatura.
+• Valores revisados con manuales de fábrica y datos técnicos: presiones según la temperatura exterior, la humedad y la altura del lugar.
+• Averías reales: falta o exceso de gas, aire en el sistema, filtro tapado, válvula de expansión trabada, compresor débil, condensador sucio, ventilador parado, capacitor débil, bobinado abierto o en corto, klixon, antihielo y más.
+• Multímetro y pinza amperimétrica: voltios, amperios, ohmios de bobinados y µF de capacitores. Pico de arranque del compresor on/off y arranque suave del inverter.
+• Herramientas de taller: bombona en báscula, bomba de vacío con vacuómetro en micrones y prueba de caída, inyector de aceite, recuperación y carga por peso.
+• Vista 3D y vista 2D con el esquema del circuito y los relojes grandes.
+• Funciona sin internet.
+
+Prueba gratis 5 días. Después puedes activar una licencia desde la propia app.
+
+----------------------------------------------------------------
+PORTUGUÊS
+----------------------------------------------------------------
+Título curto:
+Simulador 3D de ar condicionado: automóvel, mini split e camião 24 V
+
+Descrição:
+AC Diagnostic 3D é um simulador de ar condicionado para técnicos e estudantes. Ligue o manómetro, arranque o equipamento e veja como se comportam as pressões, as temperaturas e a corrente como num equipamento real.
+
+• Três equipamentos: ar de automóvel (R134a / R1234yf, válvula TXV ou tubo orifício, compressor de embraiagem ou variável), mini split (R410A, R32, R22, R290; on/off com capilar ou inverter com EEV; 110 ou 220 V) e ar de tejadilho de camião 24 V.
+• Manómetro analógico ou digital, com sobreaquecimento (SH) e subarrefecimento (SC) usando pinças de temperatura.
+• Valores revistos com manuais de fábrica e dados técnicos: pressões conforme a temperatura exterior, a humidade e a altitude do local.
+• Avarias reais: falta ou excesso de gás, ar no sistema, filtro entupido, válvula de expansão presa, compressor fraco, condensador sujo, ventilador parado, condensador elétrico fraco, bobinagem aberta ou em curto, klixon, anticongelamento e mais.
+• Multímetro e pinça amperimétrica: volts, amperes, ohms das bobinagens e µF dos condensadores.
+• Ferramentas de oficina: garrafa na balança, bomba de vácuo com vacuómetro em mícrones, injetor de óleo, recuperação e carga por peso.
+• Vista 3D e vista 2D com o esquema do circuito e os relógios grandes.
+• Funciona sem internet.
+
+Teste grátis 5 dias. Depois pode ativar uma licença na própria app.
+
+----------------------------------------------------------------
+ENGLISH
+----------------------------------------------------------------
+Short title:
+3D air-conditioning simulator: car, mini split and 24 V truck
+
+Description:
+AC Diagnostic 3D is an air-conditioning simulator for technicians and students. Hook up the gauges, start the unit and watch pressures, temperatures and current behave like on real equipment.
+
+• Three units: car A/C (R134a / R1234yf, TXV or orifice tube, clutch or variable compressor), mini split (R410A, R32, R22, R290; fixed-speed with capillary or inverter with EEV; 110 or 220 V) and 24 V truck rooftop A/C.
+• Analog or digital manifold, with superheat (SH) and subcooling (SC) using temperature clamps.
+• Values checked against OEM service manuals and technical data: pressures follow outdoor temperature, humidity and altitude.
+• Real faults: low or high charge, air in the system, clogged drier, stuck expansion valve, weak compressor, dirty condenser, dead fan, weak capacitor, open or shorted winding, overload (klixon), anti-freeze and more.
+• Multimeter and clamp meter: volts, amps, winding ohms and capacitor µF.
+• Shop tools: cylinder on a scale, vacuum pump with micron gauge and decay test, oil injector, recovery and charging by weight.
+• 3D view and 2D view with the circuit diagram and large gauges.
+• Works offline.
+
+5-day free trial. Then you can activate a licence from inside the app.
