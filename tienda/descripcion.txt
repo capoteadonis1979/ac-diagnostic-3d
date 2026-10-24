@@ -3,7 +3,7 @@ AC Diagnostic 3D — ficha para Uptodown
 
 Nombre: AC Diagnostic 3D
 Categoría: Educación (o Herramientas)
-Versión: 2.16.9
+Versión: 2.16.10
 Idiomas de la app: Español, Português, English, 中文
 Política de privacidad: https://capoteadonis1979.github.io/ac-diagnostic-3d/privacidad.html
 Contacto: capoteapps@gmail.com
